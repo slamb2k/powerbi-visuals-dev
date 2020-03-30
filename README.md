@@ -33,7 +33,7 @@ Using Dev Containers however, we can remove a substantial amount of the process 
 
 3. Open VS Code in the local folder. When VS Code detects the .devcontainer folder it will offer to open the session using the DockerFile instead. 
 
-   ![](/images/start-dev-container.png =x300)
+   ![](/images/start-dev-container.png | width=100)
 
    Click "Reopen in Container" and the session will restart but instead be running from a local Docker container.
 
