@@ -1,95 +1,84 @@
-> This documentation is deprecated. Please use new [official documentation of Power BI Visuals](https://docs.microsoft.com/en-us/power-bi/developer/power-bi-custom-visuals)  site instead.
+# Containerized Power BI Visual Devolpment
 
-# Power BI Visuals
+Instead of installing pre-requisites and configuring a development environment for creating PowerBI custom visuals, just use this pre-made dev container to get straight to work.
 
-Build Power BI visuals like a gangsta!!!
+Work transparently in a container using the Visual Studio Code Remote - Containers extension with live updating and debugging support.
  
-## Developing Your First PowerBI Visual
+## Developing a Power BI Visual
  
-This section is to provide you with a step by step tutorial of developing your first PowerBI visual using remote containers in VS Code.
-In this tutorial, you will be building a simple bar chart. The source code is located here in the [Sample Bar Chart Repo](https://github.com/Microsoft/PowerBI-visuals-sampleBarChart).
+This section is to provide you with a step by step tutorial of developing a PowerBI visual using dev containers in VS Code.
 
-![](Tutorial/images/SampleBarChart.png)
+![](/images/remote-containers.png)
 
-### Setting Up Environment
+## Prerequisites
 
-https://code.visualstudio.com/docs/remote/containers
+* If you're not signed up for Power BI Pro, [sign up for a free trial](https://powerbi.microsoft.com/pricing/) before you begin.
+* You need [Visual Studio Code](https://www.visualstudio.com/) installed.
+* You need [Windows PowerShell](https://docs.microsoft.com/powershell/scripting/install/installing-windows-powershell?view=powershell-6) version 4 or later for windows users OR the [Terminal](https://macpaw.com/how-to/use-terminal-on-mac) for OSX users.
+
+In addition you will require the appropriate Docker components for your development platform.
+
+* Windows: [Docker Desktop](https://www.docker.com/products/docker-desktop) 2.0+ on Windows 10 Pro/Enterprise. (Docker Toolbox is not supported. Windows container images are not supported.)
+* macOS: [Docker Desktop](https://www.docker.com/products/docker-desktop) 2.0+.
+* Linux: [Docker CE/EE](https://docs.docker.com/install/#supported-platforms) 18.06+ and [Docker Compose](https://docs.docker.com/compose/install) 1.21+. (The Ubuntu snap package is not supported.)
+
+## Setting up the development environment
+
+Refer to [Setting up the developer environment](https://docs.microsoft.com/en-au/power-bi/developer/visuals/custom-visual-develop-tutorial#setting-up-the-developer-environment) in the online documentation for the complete set of steps required.
+
+Using Dev Containers however, we can remove a substantial amount of the process while at the same time ensuring a consistent development approach. This is the much simpler way to go from zero to hero:
+
+1. Clone this [powerbi-visuals-dev](https://github.com/slamb2k/powerbi-visuals-dev) repo.
+2. Install the [Visual Studio Code Remote - Containers extension](https://code.visualstudio.com/docs/remote/containers) and pre-requisites.
+
+3. Open VS Code in the local folder. When VS Code detects the .devcontainer folder it will offer to open the session using the DockerFile instead. 
+
+   ![](/images/start-dev-container.png)
+
+   Click "Reopen in Container" and the session will restart but instead be running from a local Docker container.
+
+   ![](/images/vscode-docker.png)
+
+   The Docker tools in VS Code show the current containers and images that are currently available on the system.
+
+4. Since the dependencies are already included in the container image, we can simply bootstrap a visual project with ***pbiviz new <PROJECT_NAME>***.
+
+   ![](/images/new-pbiviz.png)
+
+   *The container includes a .gitignore that will prevent any of the build artifacts used for live preview from being added to Git.*
+
+   *Ports to be forwarded for live preview (8080/tcp) have been specified in dockercontainer.json configuration.*
 
 
-1. [Clone this repo](https://github.com/slamb2k/powerbi-visuals-dev)
-2. [Install the  Visual Studio Code Remote - Containers extension and pre-requisites](https://code.visualstudio.com/docs/remote/containers)
-3. [Start VS Code in the local folder and run the Remote-Containers: Open Folder in Container... command from the Command Palette (F1) or quick actions Status bar item](https://code.visualstudio.com/docs/remote/containers#_quick-start-open-an-existing-folder-in-a-container)
+5. Change to the new folder created for the visual project and activate the development server with the command ***pbiviz start***.
 
-4. [Use the existing DockerFile in the local folder wait until it spins up.]
-2. [Create SSL certifications to enable live preview of visuals](tools/CreateCertificate.md)
-3. [Install generated SSL certifications to enable live preview of visuals](tools/CertificateSetup.md)
-4. [Enable Developer Tools in PowerBI](tools/DebugVisualSetup.md)
-5. [Create New PowerBI Visual Project](tools/usage.md#creating-a-new-visual)
-6. [Start Development Server for Live Update and Incremental Development](tools/usage.md#testing-your-visual-in-powerbi)
-7. [Adding the Debug Visual from the Visual Well into your Favorite Report](tools/usage.md#viewing-your-visual-in-powerbi)
-8. [Adding External Libraries](Tutorial/ExternalLibraries.md)
-9. [Installing @Types for External Libraries](Tutorial/@Types.md)
+6. A development certificate has already been created for you when the docker container was built. As this isn't a certificate from a trusted authority, when we open the web page, we will receive a response like so.
+ 
+   ![](/images/cert-fail.png)
 
-### Building Bar Chart
-1. [Building a Visual with Static Data](Tutorial/StaticVisual.md)
-2. [Adding Databinding to the Bar Chart](Tutorial/DataBinding.md)
-3. [Adding Color to the Bar Chart](Tutorial/ColorPalette.md)
-4. [Adding Selection and Interaction with Other Visuals](Tutorial/Selection.md)
-5. [Adding Static Objects to Property Pane](Tutorial/StaticObjects.md)
-6. [Adding Databound Objects to Property Pane](Tutorial/DataBoundObjects.md)
-7. [Adding Tooltips to the Bar Chart](Tutorial/ToolTips.md)
-8. [Adding A Slider control to the Bar Chart](Tutorial/SliderControl.md)
-9. [Adding Locale support to the Bar Chart](https://github.com/Microsoft/PowerBI-visuals-sampleBarChart/blob/master/Tutorial/Locale.md)
-10. [Adding URL Launcher element to the Bar Chart](Tutorial/LaunchURL.md)
-11. [Finally Package for Distribution ... Done!](tools/usage.md#packaging-your-visual-for-distribution)
+   We need to explictly do so on this development environment. Believe it or not, I find the easiest way is from good old Internet Explorer. 
+   
+   ***Run IE as Administrator*** and open the development server at https://localhost:8080/webpack-dev-server/.
+ 
+   ![](/images/cert-ie.png)
 
-### Building a Slicer Visual
-1. [The sample slicer visual](https://github.com/Microsoft/powerbi-visuals-sampleslicer)
-2. [Adding advanced filter API](https://github.com/Microsoft/powerbi-visuals-sampleslicer/blob/master/doc/AddingAdvancedFilterAPI.md)
-3. [Using the advanced filter API](https://github.com/Microsoft/powerbi-visuals-sampleslicer/blob/master/doc/UsingAdvancedFilterAPI.md)
-4. [Added bookmarks support](Tutorial/BookmarksSupport.md)
-5. [Enable Sync Slicers](Tutorial/SlicerSynchronizationSupport.md)
+   Click ***Certificate Error*** and then ***Certificate Information*** to open the certificate installation wizard. Ensure that you install the certificate to the ***Local Machine*** store and add it to the Trusted Root Certification Authority store. Once you refresh, you should now receive a response more like so:
 
-### Building R Powered Custom Visual (corrplot)
-1. [Creating a new R Powered Custom Visual](RVisualTutorial/CreateNewVisual.md)
-2. [Starting a simple R Script](RVisualTutorial/CorrplotScript.md)
-3. [Adding a static property to the property pane](RVisualTutorial/PropertiesPane.md)
-4. [Validate input data in R Script](RVisualTutorial/InputValidationInR.md)
-5. [Creating R Powered Custom Visual with HTML output](RVisualTutorial/CreateRHTML.md)
+   ![](/images/cert-good.png)
 
-## Table of Contents
+## Custom Visual Development ##
 
-* [Anatomy of a Visual Project](VisualProject.md)
-* [Installing PowerBI Visuals Tool](tools/README.md#installation)
-    * [Install SSL Certifications](tools/CertificateSetup.md)
-    * [Enable Developer Tools](tools/DebugVisualSetup.md)
-    * [Tools Usage Guide](tools/usage.md)
-    * [Debugging Guide](tools/debugging.md)
-* [Adding Power BI utils](Tutorial/Utils.md)    
-* [Adding External Libraries](Tutorial/ExternalLibraries.md)
-    * [Installing Typings for Libraries](Tutorial/Typings.md)
-* [Visual Capabilities Definition](Capabilities/Capabilities.md)
-    * [Data Roles](Capabilities/Capabilities.md#define-the-data-fields-your-visual-expects---dataroles)
-    * [Data View Mappings](Capabilities/DataViewMappings.md)
-    * [Objects](Capabilities/Objects.md)
-    * [Highlighting](Capabilities/Highlighting.md)
-	* [Drill Down](Capabilities/Drilldown.md)
-* [Visual Documentation](Visual/Visual.md)
-    * [Visual/IVisual Api](Visual/IVisualApi.md)
-    * [Handling Selection in Visuals](Visual/Selection.md)
-    * [Adding Tooltips to Visuals](Visual/Tooltips.md)
-    * [Localizing Visuals](Visual/Locale.md)
-    * [Applying filters](https://github.com/Microsoft/powerbi-visuals-sampleslicer/blob/master/doc/UsingAdvancedFilterAPI.md)
-    * [Pulling data in segments](Visual/fetchMoreData.md)
-* [Mobile development guideline](Tutorial/MobileGuideline.md)
-* [PowerBI Glossary](Glossary.md)
-* [Change Log](ChangeLog.md)
-* [Roadmap](Roadmap/README.md)
+From this point the guidance on creating a custom visual for PowerBI works just fine. Refer to [Creating a custom visual](https://docs.microsoft.com/en-au/power-bi/developer/visuals/custom-visual-develop-tutorial#creating-a-custom-visual) for the steps required to have a simple working example of a custom visual running in just a few more minutes.
 
-## Reporting Issues
+   ![](https://docs.microsoft.com/en-au/power-bi/developer/visuals/media/custom-visual-develop-tutorial/resize-visual.png)
 
-If you have any issues with Power BI custom visuals or the command line tools, please let us know. First, search the Power BI Developer Forums page to see if your issue has already been reported. If it already exists, please contribute your experience to the comments. Otherwise, create a new issue. Be sure to be as detailed as possible about exactly what you were doing when the issue occured and how we can reproduce it.
+## What's Next ##
 
-* [PowerBI Developer Forum](https://community.powerbi.com/t5/Developer/bd-p/Developer) - Custom visual creation, API usage, real-time dashboards, integrating with Power BI, content packs. Basically, everything about extending Power BI.
-* [PowerBI-visuals-tools issue page](https://github.com/Microsoft/PowerBI-visuals-tools/issues) - Issues related to the CLI tools specifically
-* [PowerBI-visuals issue page](https://github.com/Microsoft/PowerBI-visuals/issues) - Any other issues related to Power BI visuals
+Since we've now got a sweet SOE for our custom visual developers, we should also look at rubbing a little DevOps on the rest of the process. Some example items we may explore further:
+
+1. Pipelines to build and test the actual custom visuals we create.
+
+2. I haven't had much luck in finding a programmatic or scriptable method for registering the custom visuals with the organizational store or the Marketplace. I will investigate and hopefully something exists to allow Continuous Delivery of our visuals just like any other software project.
+
+3. Automated pipelines to build, test and publish our SOE container image to ACR. I always prefer immutability when possible but we'll have to explore how well that works with the VS Code Remote - Containers extension.
+
