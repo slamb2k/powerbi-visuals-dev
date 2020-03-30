@@ -26,7 +26,7 @@ In addition you will require the appropriate Docker components for your developm
 
 Refer to [Setting up the developer environment](https://docs.microsoft.com/en-au/power-bi/developer/visuals/custom-visual-develop-tutorial#setting-up-the-developer-environment) in the online documentation for the complete set of steps required.
 
-Using Dev Containers however, we can remove a substantial amount of the process while at the same time ensuring a consistent development approach. This is the much simpler way to go from zero to hero:
+Using Dev Containers however, we can remove a substantial amount of the process while at the same time ensuring a consistent development method used by the team. The DockerFile included allows control over what dependencies are used by the developers while also allowing initialisation activities to occur when the Docker container is built. This results in a much simpler way to go from zero to hero:
 
 1. Clone this [powerbi-visuals-dev](https://github.com/slamb2k/powerbi-visuals-dev) repo.
 2. Install the [Visual Studio Code Remote - Containers extension](https://code.visualstudio.com/docs/remote/containers) and pre-requisites.
