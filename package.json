@@ -1,7 +1,7 @@
 {
   "name": "powerbi-visuals-dev",
   "version": "1.0.0",
-  "description": "Dev Container for Power BI visuals development.",
+  "description": "Dev Container for Power BI custom visual development.",
   "author": "Simon Lamb",
   "dependencies": {
     "powerbi-visuals-tools": "^2.5.2"
