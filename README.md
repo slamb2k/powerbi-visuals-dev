@@ -8,7 +8,7 @@ Work transparently in a container using the Visual Studio Code Remote - Containe
  
 This section is to provide you with a step by step tutorial of developing a PowerBI visual using dev containers in VS Code.
 
-![](/images/remote-containers.png)
+![](/images/remote-containers.png =x400)
 
 ## Prerequisites
 
@@ -33,17 +33,17 @@ Using Dev Containers however, we can remove a substantial amount of the process 
 
 3. Open VS Code in the local folder. When VS Code detects the .devcontainer folder it will offer to open the session using the DockerFile instead. 
 
-   ![](/images/start-dev-container.png)
+   ![](/images/start-dev-container.png =x300)
 
    Click "Reopen in Container" and the session will restart but instead be running from a local Docker container.
 
-   ![](/images/vscode-docker.png)
+   ![](/images/vscode-docker.png =100x)
 
    The Docker tools in VS Code show the current containers and images that are currently available on the system.
 
 4. Since the dependencies are already included in the container image, we can simply bootstrap a visual project with ***pbiviz new <PROJECT_NAME>***.
 
-   ![](/images/new-pbiviz.png)
+   ![](/images/new-pbiviz.png =x300)
 
    *The container includes a .gitignore that will prevent any of the build artifacts used for live preview from being added to Git.*
 
@@ -54,17 +54,17 @@ Using Dev Containers however, we can remove a substantial amount of the process 
 
 6. A development certificate has already been created for you when the docker container was built. As this isn't a certificate from a trusted authority, when we open the web page, we will receive a response like so.
  
-   ![](/images/cert-fail.png)
+   ![](/images/cert-fail.png =x300)
 
    We need to explictly do so on this development environment. Believe it or not, I find the easiest way is from good old Internet Explorer. 
    
    ***Run IE as Administrator*** and open the development server at https://localhost:8080/webpack-dev-server/.
  
-   ![](/images/cert-ie.png)
+   ![](/images/cert-ie.png =x300)
 
    Click ***Certificate Error*** and then ***Certificate Information*** to open the certificate installation wizard. Ensure that you install the certificate to the ***Local Machine*** store and add it to the Trusted Root Certification Authority store. Once you refresh, you should now receive a response more like so:
 
-   ![](/images/cert-good.png)
+   ![](/images/cert-good.png =x300)
 
 ## Custom Visual Development ##
 
