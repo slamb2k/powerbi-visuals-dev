@@ -1,4 +1,4 @@
-# Containerized Power BI Visual Devolpment
+# Containerized Power BI Visual Development
 
 Instead of installing pre-requisites and configuring a development environment for creating PowerBI custom visuals, just use this pre-made dev container to get straight to work.
 
@@ -16,7 +16,7 @@ This section is to provide you with a step by step tutorial of developing a Powe
 * You need [Visual Studio Code](https://www.visualstudio.com/) installed.
 * You need [Windows PowerShell](https://docs.microsoft.com/powershell/scripting/install/installing-windows-powershell?view=powershell-6) version 4 or later for windows users OR the [Terminal](https://macpaw.com/how-to/use-terminal-on-mac) for OSX users.
 
-In addition you will require the appropriate Docker components for your development platform.
+In addition, you will require the appropriate Docker components for your development platform.
 
 * Windows: [Docker Desktop](https://www.docker.com/products/docker-desktop) 2.0+ on Windows 10 Pro/Enterprise. (Docker Toolbox is not supported. Windows container images are not supported.)
 * macOS: [Docker Desktop](https://www.docker.com/products/docker-desktop) 2.0+.
